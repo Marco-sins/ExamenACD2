@@ -19,9 +19,10 @@ public class DatabaseConnection
                         "categoria TEXT, " + 
                         "precio REAL, " + 
                         "stock INTEGER);";
-        try (Connection c = getConection(); Statement st = c.createStatement())
+        try (Connection c = getConection(); 
+        Statement st = c.createStatement())
         {
-            st.executeQuery(sql);
+            st.execute(sql);
             System.out.println("Database creation was succesful");
         }
         catch (SQLException e)

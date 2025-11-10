@@ -74,7 +74,7 @@ public class DispositivoDAO
 
     public Dispositivo buscarPorCategoriayRangoPrecio(String categoria, double precioMinimo, double precioMaximo) throws SQLException
     {
-        String sql = String.format("SELECT * FROM dispositivos WHERE categoria = %s AND precio BETWEEN %d AND %d", 
+        String sql = String.format("SELECT * FROM dispositivos d WHERE d.categoria = \"%s\" AND d.precio BETWEEN %f AND %f", 
                 categoria,
                 precioMinimo,
                 precioMaximo);
@@ -83,14 +83,14 @@ public class DispositivoDAO
             PreparedStatement ps = c.prepareStatement(sql);
             ResultSet r = ps.executeQuery())
         {
-            if (r.wasNull())
+            if (!r.next())
                 return null;
             d = new Dispositivo(
-                r.getInt("id"),
-                r.getString("nombre"),
-                r.getString("categoria"),
-                r.getDouble("precio"),
-                r.getInt("stock")
+                r.getInt(1),
+                r.getString(2),
+                r.getString(3),
+                r.getDouble(4),
+                r.getInt(5)
             );
         }
         return d;

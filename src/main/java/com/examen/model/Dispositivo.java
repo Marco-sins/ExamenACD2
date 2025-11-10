@@ -44,7 +44,7 @@ public class Dispositivo
     @Override
     public String toString()
     {
-        return String.format("Id: %d,\nNombre: %s,\nCategoria: %s,\nPrecio: %d,\nStock: %d", 
+        return String.format("Id: %d,\nNombre: %s,\nCategoria: %s,\nPrecio: %f,\nStock: %d", 
                 this.id,
                 this.nombre,
                 this.categoria,

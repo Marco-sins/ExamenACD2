@@ -1,9 +1,11 @@
 package com.examen.app;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 import com.examen.dao.DispositivoDAO;
 import com.examen.model.Dispositivo;
+import com.examen.util.DatabaseConnection;
 
 public class AppDispositivos 
 {
@@ -36,7 +38,13 @@ public class AppDispositivos
     {
         try
         {
-            System.out.println((dao.listarDispositivos()).toString());
+            List<Dispositivo> list = dao.listarDispositivos();
+            int i = 0;
+            while (i < list.size())
+            {
+                System.out.println(list.get(i).toString());
+                i++;
+            }
         }
         catch (SQLException e)
         {
@@ -64,6 +72,8 @@ public class AppDispositivos
 
     private static void actualizarPrecio()
     {
+        System.out.println("ID: ");
+        int id = scan.nextInt();
         System.out.println("Nombre: ");
         String nombre = scan.next();
         System.out.println("Categoria: ");
@@ -72,11 +82,40 @@ public class AppDispositivos
         Double precio = scan.nextDouble();
         System.out.println("Stock: ");
         int stock = scan.nextInt();
+
+        Dispositivo d = new Dispositivo(id, nombre, categoria, precio, stock);
+        try
+        {
+            dao.actualizarDispositivo(d);
+        }
+        catch (SQLException e)
+        {
+            System.err.println(e);
+        }
     }
 
     private static void eliminarDispositivo()
     {
+        System.out.println("ID: ");
+        int id = scan.nextInt();
+        System.out.println("Nombre: ");
+        String nombre = scan.next();
+        System.out.println("Categoria: ");
+        String categoria = scan.next();
+        System.out.println("Precio: ");
+        Double precio = scan.nextDouble();
+        System.out.println("Stock: ");
+        int stock = scan.nextInt();
 
+        Dispositivo d = new Dispositivo(id, nombre, categoria, precio, stock);
+        try
+        {
+            dao.eliminarDispositivo(d);
+        }
+        catch (SQLException e)
+        {
+            System.err.println(e);
+        }
     }
 
     public static void appDisposivos()
@@ -118,7 +157,7 @@ public class AppDispositivos
     public static void main(String[] av)
     {
         System.out.println("Welcome to Manager \"Dispositivos\"");
-
+        DatabaseConnection.inicialization();
         appDisposivos();
 
         System.out.println("Bye, have a good day <3");
