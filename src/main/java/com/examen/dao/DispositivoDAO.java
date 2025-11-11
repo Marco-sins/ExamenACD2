@@ -22,6 +22,7 @@ public class DispositivoDAO
             ps.setDouble(3, d.getPrecio());
             ps.setInt(4, d.getStock());
             ps.executeUpdate();
+            c.close();
         }
     }
 
@@ -36,6 +37,7 @@ public class DispositivoDAO
             ps.setInt(4, d.getStock());
             ps.setInt(5, d.getId());
             ps.executeUpdate();
+            c.close();
         }
     }
 
@@ -46,6 +48,7 @@ public class DispositivoDAO
         {
             ps.setInt(1, d.getId());
             ps.executeUpdate();
+            c.close();
         }
     }
 
@@ -68,6 +71,7 @@ public class DispositivoDAO
                 );
                 list.add(d);
             }
+            c.close();
         }
         return list;
     }
@@ -92,6 +96,7 @@ public class DispositivoDAO
                 r.getDouble(4),
                 r.getInt(5)
             );
+            c.close();
         }
         return d;
     }

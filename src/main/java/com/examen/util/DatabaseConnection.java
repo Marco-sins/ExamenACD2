@@ -24,6 +24,7 @@ public class DatabaseConnection
         {
             st.execute(sql);
             System.out.println("Database creation was succesful");
+            c.close();
         }
         catch (SQLException e)
         {
